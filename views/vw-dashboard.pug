@@ -1,0 +1,19 @@
+doctype html
+html
+	head
+		link(rel='stylesheet', href='../stylesheets/style.css')
+		title= title
+	
+	body
+		h3(style="margin-top: 0") #{title}
+		include partials/header.pug
+		div(style='display:block; margin:0 0 2.5rem 0')
+			a(href="/searchBook") Search Book
+			|
+			|
+			a(href="/somethingElse") Something Else
+		
+		
+
+		//- script(src='/javascripts/modules/adminM0d.js')
+
