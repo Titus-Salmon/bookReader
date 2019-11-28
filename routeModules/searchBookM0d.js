@@ -10,10 +10,21 @@ module.exports = {
 	searchBook: router.post('/searchBookPost', (req, res, next) => {
 
 		let fileReadPost = req.body['fileReadPost']
+		let searchTerm = req.body['searchTermPost']
 
 		fs.readFile(`${process.cwd()}/public/bookFiles/${fileReadPost}`, 'utf8', function (err, data) {
 			if (err) throw err;
 			console.log(`data==>${data}`);
+
+			if (data.includes(`${searchTerm}`)) {
+				console.log(`data includes ${searchTerm}`)
+			} else {
+				console.log(`data DOES NOT include ${searchTerm}`)
+			}
+
+			// if (data.includes('here')) {
+			// 	console.log(`data includes "here!"`)
+			// }
 
 			res.render('vw-searchBook', {
 				title: 'vw-searchBook from searchBookM0d.js',
