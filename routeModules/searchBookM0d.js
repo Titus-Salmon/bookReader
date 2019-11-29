@@ -13,14 +13,24 @@ module.exports = {
 		let searchTerm = req.body['searchTermPost']
 
 		fs.readFile(`${process.cwd()}/public/bookFiles/${fileReadPost}`, 'utf8', function (err, data) {
-			if (err) throw err;
-			console.log(`data==>${data}`);
+			if (err) throw err
+			console.log(`data==>${data}`)
 
-			if (data.includes(`${searchTerm}`)) {
-				console.log(`data includes ${searchTerm}`)
-			} else {
-				console.log(`data DOES NOT include ${searchTerm}`)
+			const lines = data.split(/\r?\n/)
+			lines.forEach((line) => {
+				console.log(`line==>${line}`)
+			})
+
+			console.log(`searchTerm==>${searchTerm}`)
+
+			if (searchTerm !== '') {
+				if (data.includes(`${searchTerm}`)) {
+					console.log(`data includes ${searchTerm}`)
+				} else {
+					console.log(`data DOES NOT include ${searchTerm}`)
+				}
 			}
+
 
 			// if (data.includes('here')) {
 			// 	console.log(`data includes "here!"`)
@@ -30,8 +40,7 @@ module.exports = {
 				title: 'vw-searchBook from searchBookM0d.js',
 				fsReadFileResults: {
 					fsReadFileResultsData: data,
-					// responseAlt: fs.ReadStream,
-					// responseAlt2: stream.pipe(res)
+					fsReadFileResultsLines: lines,
 				},
 			})
 		})
