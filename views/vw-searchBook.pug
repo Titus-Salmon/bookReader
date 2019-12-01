@@ -5,32 +5,20 @@ html
 		title= title
 
 	body
-		//- h3(style="margin-top: 0") #{title}
 		include vw-dashboard.pug
-		p do something with fs.readFile
-
 		div(style="display:block")
-			form#searchBookPost(action='/searchBook/searchBookPost' method='POST' accept-charset="UTF-8")
+			form#searchBookPost(action='/searchBook/loadBookPost' method='POST' accept-charset="UTF-8")
 				label.input-label-1(for='fileRead') File to Read
 				input#fileRead.input-unit-1(type='text', placeholder='enter filename & ext.', name='fileReadPost', value='')
+				button#ldBkBtn(type='submit', form='searchBookPost') Load Book
 
-				label.input-label-1(for='searchTerm') Term to Search
-				input#searchTerm.input-unit-1(type='text', placeholder='enter search term', name='searchTermPost', value='')
-
-				//- label.input-label-1(for='wsDiffResults') WS Diff Results
-				//- input#wsDiffResultsLoadTbl.input-unit-1(type='text', name='wsDiffResultsLoadTblPost' value=wsDiff)
-
-				button#ldTblBtn(type='submit', form='searchBookPost') Search Book
+			label.input-label-1(for='searchTerm') Term to Search
+			input#searchTerm.input-unit-1(type='text', placeholder='enter search term', name='searchTermPost')
+			button#searchBookBtn(type='submit') Search Book
 
 		if fsReadFileResults !== undefined
-			//- p= streamPipe.response
-			//- p= streamPipe.responseAlt
-			//- p= streamPipe.responseAlt2
-			//- p#fsResults= fsReadFileResults.fsReadFileResultsData
 			each elmnt in fsReadFileResults.fsReadFileResultsLines
 				p.fsResults= elmnt
-
-
 
 		script(src='/javascripts/domModules/textDecM0d.js')
 

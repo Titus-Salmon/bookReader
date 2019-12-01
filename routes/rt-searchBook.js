@@ -10,12 +10,9 @@ const {
 router.get('/', function (req, res, next) {
   res.render('vw-searchBook', {
     title: 'vw-searchBook from rt-searchBook.js',
-    // username: req.user.name,
-    // userEmail: req.user.email,
-    // userEmail_stringified: JSON.stringify(req.user.email),
   });
 });
 
-router.post('/searchBookPost', searchBook)
+router.post('/loadBookPost', searchBook)
 
 module.exports = router;
