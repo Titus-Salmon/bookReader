@@ -7,18 +7,25 @@ html
 	body
 		include vw-dashboard.pug
 		div(style="display:block")
-			form#searchBookPost(action='/searchBook/loadBookPost' method='POST' accept-charset="UTF-8")
+			form#searchBookPost(action='/searchBook/searchBookPost' method='POST' accept-charset="UTF-8")
 				label.input-label-1(for='fileRead') File to Read
-				input#fileRead.input-unit-1(type='text', placeholder='enter filename & ext.', name='fileReadPost', value='')
-				button#ldBkBtn(type='submit', form='searchBookPost') Load Book
+				if fsReadFileResults == undefined
+					input#fileRead.input-unit-1(type='text', placeholder='enter filename & ext.', name='fileReadPost', value='' required)
+				if fsReadFileResults !== undefined
+					input#fileRead.input-unit-1(type='text', placeholder='enter filename & ext.', name='fileReadPost', value=fsReadFileResults.fileReadPost required)
+					label.input-label-1(for='searchBook') Term to Search (backend)
+					input#searchBook.input-unit-1(type='text', placeholder='enter filename & ext.', name='searchBookPost', value='')
+				button(type='submit', form='searchBookPost') Submit
 
-			label.input-label-1(for='searchTerm') Term to Search
-			input#searchTerm.input-unit-1(type='text', placeholder='enter search term', name='searchTermPost')
-			button#searchBookBtn(type='submit') Search Book
+			if fsReadFileResults !== undefined
+				label.input-label-1(for='searchTerm') Term to Search (DOM)
+				input#searchTerm.input-unit-1(type='text', placeholder='enter search term', name='searchTermPost')
+				button#searchBookBtn(type='submit') Search Book (DOM)
 
 		if fsReadFileResults !== undefined
 			each elmnt in fsReadFileResults.fsReadFileResultsLines
 				p.fsResults= elmnt
+				//- div= elmnt
 
 		script(src='/javascripts/domModules/textDecM0d.js')
 

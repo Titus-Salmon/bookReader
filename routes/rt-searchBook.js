@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 
 //v//destructuring////////////////////////////////
+// const {
+//   loadBook
+// } = require('../routeModules/loadBookM0d')
 const {
   searchBook
 } = require('../routeModules/searchBookM0d')
@@ -13,6 +16,7 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.post('/loadBookPost', searchBook)
+// router.post('/loadBookPost', loadBook)
+router.post('/searchBookPost', searchBook)
 
 module.exports = router;
