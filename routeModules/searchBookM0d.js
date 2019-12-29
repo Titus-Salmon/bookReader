@@ -27,18 +27,8 @@ module.exports = {
 				}
 			}
 
-			// if (searchBookPost !== undefined) {
-			// 	lines.forEach((line) => {
-			// 		let words = line.split(/\s/)
-			// 		words.forEach((word) => {
-			// 			if (word.toLowerCase() == searchBookPost) {
-			// 				console.log(`search term '${searchBookPost}' found in location ${line}`)
-			// 				console.log(`typeof line==> ${typeof line}`)
-			// 			}
-			// 		})
-			// 	})
-			// }
-
+			//try creating an object that matches same shape as DOM data, in order to pass targeted search results back to
+			//frontend for DOM manipulation (highlighting, passing to database, etc...) 
 
 			res.render('vw-searchBook', {
 				title: 'vw-searchBook from searchBookM0d.js',
