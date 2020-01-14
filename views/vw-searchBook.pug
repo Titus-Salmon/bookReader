@@ -23,8 +23,17 @@ html
 				button#searchBookBtn(type='submit') Search Book (DOM)
 
 		if fsReadFileResults !== undefined
+			-console.log(`fsReadFileResults==> ${fsReadFileResults}`)
+			-console.log(`Object.keys(fsReadFileResults)==> ${Object.keys(fsReadFileResults)}`)
+			-console.log(`typeof fsReadFileResults.fsReadFileResultsLines==> ${typeof fsReadFileResults.fsReadFileResultsLines}`)
+			-console.log(`Object.keys(fsReadFileResults.fsReadFileResultsLines)==> ${Object.keys(fsReadFileResults.fsReadFileResultsLines)}`)
+			-console.log(`Object.keys(fsReadFileResults.fsReadFileResultsData)==> ${Object.keys(fsReadFileResults.fsReadFileResultsData)}`)
+			//- -console.log(`JSON.stringify(fsReadFileResults)==> ${JSON.stringify(fsReadFileResults)}`)
 			each elmnt in fsReadFileResults.fsReadFileResultsLines
-				p.fsResults= elmnt
+				//- -console.log(`typeof elmnt==> ${typeof elmnt}`)
+				//- -console.log(`fsReadFileResults.fsReadFileResultsLines.indexOf(elmnt)==> ${fsReadFileResults.fsReadFileResultsLines.indexOf(elmnt)}`)
+				-console.log(`elmnt${fsReadFileResults.fsReadFileResultsLines.indexOf(elmnt)}==> ${elmnt}`)
+				p.fsResults= `elmnt${fsReadFileResults.fsReadFileResultsLines.indexOf(elmnt)}==> ${elmnt}`
 				//- div= elmnt
 
 		script(src='/javascripts/domModules/textDecM0d.js')
