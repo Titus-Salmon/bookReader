@@ -34,8 +34,12 @@ module.exports = {
 						// let SRO = {}
 
 						/**javascript Lookahead (from https://javascript.info/regexp-lookahead-lookbehind)
-						The syntax is: X(?=Y), it means "look for X, but match only if followed by Y". There may be any pattern instead of X and Y. */
-						let words = lines[i].split(/\s+(?=\w+)/) //supposed to split on [any # of spaces] only if followed by [any # of word chars]
+						 * X(?=Y) 	Positive lookahead 	X if followed by Y
+						 * (?<=Y)X 	Positive lookbehind 	X if after Y
+						 * ==t0d==>you can combine the 2==> (?<=A)X(?=B) to yield: "X if after A and followed by B" <==t0d==*/
+						let words = lines[i].split(/(?<=\w+)\s+(?=\w+)/) //supposed to split on [any # of spaces] only if after [any # of word chars]
+						//AND followed by [any # of word chars] (in other words, we only want to split on spaces BETWEEN words, not any LEADING
+						//or TRAILING spaces)
 						for (let j = 0; j < words.length; j++) {
 							if (words[j].toLowerCase() == searchBookPost) {
 								let SRO = {}
