@@ -15,43 +15,44 @@ module.exports = {
 			if (err) throw err
 
 			const lines = data.split(/\r?\n/) //splits on carriage return & new line; ? = "once or none"
-			// const lines = data.split(/\r\n/)
-			// const lines = data.split(/\n/)
-			// const lines = data.split(/\r/)
-			// const lines = data.split(/\s/)
 
-			// console.log(`lines.indexOf(\n)==> ${lines.indexOf(/\n/)}`)
-			// console.log(`lines.indexOf('   BOOK I')==> ${lines.indexOf('   BOOK I')}`)
-
-			for (let h = 0; h < lines.length; h++) {
-				console.log(`lines[${h}]==> ${lines[h]}`)
-			}
+			// for (let h = 0; h < lines.length; h++) {
+			// 	console.log(`lines[${h}]==> ${lines[h]}`)
+			// }
 
 			function backendTermSearch() {
 				if (searchBookPost !== undefined) {
 					// let SRO = {}
+					console.log(`lines[6]==> ${lines[6]}`)
+					let testWords = lines[6].split(/(?<=.+)\s+(?=.+)/)
+					console.log(`testWords==> ${testWords}`)
+					for (let x = 0; x < testWords.length; x++) {
+						console.log(`testWords[${x}]==> ${testWords[x]}`)
+					}
 					for (let i = 0; i < lines.length; i++) {
-						// let SRO = {}
-
 						/**javascript Lookahead (from https://javascript.info/regexp-lookahead-lookbehind)
 						 * X(?=Y) 	Positive lookahead 	X if followed by Y
 						 * (?<=Y)X 	Positive lookbehind 	X if after Y
 						 * ==t0d==>you can combine the 2==> (?<=A)X(?=B) to yield: "X if after A and followed by B" <==t0d==*/
-						let words = lines[i].split(/(?<=\w+)\s+(?=\w+)/) //supposed to split on [any # of spaces] only if after [any # of word chars]
+						// let words = lines[i].split(/(?<=\w+)\s+(?=\w+)/) //supposed to split on [any # of spaces] only if after [any # of word chars]
+						// //AND followed by [any # of word chars] (in other words, we only want to split on spaces BETWEEN words, not any LEADING
+						// //or TRAILING spaces)
+						let words = lines[i].split(/(?<=.+)\s+(?=.+)/) //supposed to split on [any # of spaces] only if after [any # of word chars]
 						//AND followed by [any # of word chars] (in other words, we only want to split on spaces BETWEEN words, not any LEADING
 						//or TRAILING spaces)
 						for (let j = 0; j < words.length; j++) {
-							if (words[j].toLowerCase() == searchBookPost) {
+							if (words[j].toLowerCase().includes(`${searchBookPost}`)) {
 								let SRO = {}
 								SRO[`line#`] = i
 								console.log(`search term '${searchBookPost}' found in line#: ${i}`)
+								console.log(`${words[j-1]}_<<${words[j]}>>_${words[j+1]}`)
 								SRO[`word#`] = j
 								console.log(`within line# ${i}, search term '${searchBookPost}' found in word#: ${j}`)
 								SRArr.push(SRO)
 							}
 						}
 					}
-					console.log(`SRarr==> ${SRArr}`)
+					// console.log(`SRarr==> ${SRArr}`)
 					console.log(`JSON.stringify(SRarr)==> ${JSON.stringify(SRArr)}`)
 				}
 			}
@@ -67,6 +68,8 @@ module.exports = {
 					fileReadPost: fileReadPost,
 					fsReadFileResultsData: data,
 					fsReadFileResultsLines: lines,
+					fsReadFileResultsSRArr: SRArr,
+					searchBookPost: searchBookPost
 					// fsReadFileResultsFoundTerm: foundTerm,
 					// lineCache: lineCache
 				},

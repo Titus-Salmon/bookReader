@@ -19,20 +19,15 @@ html
 
 			if fsReadFileResults !== undefined
 				label.input-label-1(for='searchTerm') Term to Search (DOM)
-				input#searchTerm.input-unit-1(type='text', placeholder='enter search term', name='searchTermPost')
+				input#searchTerm.input-unit-1(type='text', placeholder='enter search term', name='searchTermPost', value=fsReadFileResults.searchBookPost)
 				button#searchBookBtn(type='submit') Search Book (DOM)
 
 		if fsReadFileResults !== undefined
-			//- -console.log(`fsReadFileResults==> ${fsReadFileResults}`)
-			//- -console.log(`Object.keys(fsReadFileResults)==> ${Object.keys(fsReadFileResults)}`)
-			//- -console.log(`typeof fsReadFileResults.fsReadFileResultsLines==> ${typeof fsReadFileResults.fsReadFileResultsLines}`)
-			//- -console.log(`Object.keys(fsReadFileResults.fsReadFileResultsLines)==> ${Object.keys(fsReadFileResults.fsReadFileResultsLines)}`)
-			//- -console.log(`Object.keys(fsReadFileResults.fsReadFileResultsData)==> ${Object.keys(fsReadFileResults.fsReadFileResultsData)}`)
-			//- -console.log(`JSON.stringify(fsReadFileResults)==> ${JSON.stringify(fsReadFileResults)}`)
+			label.input-label-1(for='parsedSearchRes') parsedSearchRes
+			input#parsedSearchRes.input-unit-1(type='text', name='parsedSearchResPost', value=fsReadFileResults.fsReadFileResultsSRArr)
+			button#parsedSearchResBtn(type='submit') Cycle through results
+			//- -console.log(`fsReadFileResults.fsReadFileResultsSRArr==>${fsReadFileResults.fsReadFileResultsSRArr}`)
 			each elmnt in fsReadFileResults.fsReadFileResultsLines
-				//- -console.log(`typeof elmnt==> ${typeof elmnt}`)
-				//- -console.log(`fsReadFileResults.fsReadFileResultsLines.indexOf(elmnt)==> ${fsReadFileResults.fsReadFileResultsLines.indexOf(elmnt)}`)
-				//- -console.log(`elmnt${fsReadFileResults.fsReadFileResultsLines.indexOf(elmnt)}==> ${elmnt}`)
 				p.fsResults= `elmnt${(fsReadFileResults.fsReadFileResultsLines).indexOf(elmnt)}==> ${elmnt}`
 				//- div= elmnt
 
