@@ -1,15 +1,39 @@
 let fsResults = document.getElementsByClassName('fsResults')
+// let fsResults = document.querySelectorAll('fsResults')
 let searchTerm = document.getElementById('searchTerm')
 let searchBookBtn = document.getElementById('searchBookBtn')
 let parsedSearchResBtn = document.getElementById('parsedSearchResBtn')
 let parsedSearchRes = document.getElementById('parsedSearchRes')
 
+// console.log(`typeof fsResults==> ${typeof fsResults}`)
+// console.log(`fsResults==> ${fsResults}`)
+// console.log(`fsResults.length==> ${fsResults.length}`)
+// console.log(`JSON.stringify(fsResults)==> ${JSON.stringify(fsResults)}`)
+// console.log(`fsResults[4].innerHTML==> ${fsResults[4].innerHTML}`)
+// console.log(`JSON.stringify(fsResults[4])==> ${JSON.stringify(fsResults[4])}`)
+// console.log(`typeof fsResults[4]==> ${typeof fsResults[4]}`)
+
+// let splitTest1 = fsResults[6].innerHTML.split((/(?<=.+)\s+(?=.+)/))
+
+// console.log(`splitTest1==> ${splitTest1}`)
+
+let regex1 = /(,)|(\.)|(-)/g
+
 searchBookBtn.addEventListener("click", function () {
   for (let i = 0; i < fsResults.length; i++) {
-    // fsResults[i].innerHTML = fsResults[i].innerHTML.toLowerCase()
-    if (fsResults[i].innerHTML.includes(`${searchTerm.value}`)) {
-      fsResults[i].innerHTML = fsResults[i].innerHTML.replace(`${searchTerm.value}`, `<span style="background-color: green">${searchTerm.value}</span>`)
+    let fsResultsSplit = fsResults[i].innerHTML.split((/(?<=.+)\s+(?=.+)/))
+
+    for (var j = 0; j < fsResultsSplit.length; j++) {
+      if (fsResultsSplit[j].toLowerCase().includes((searchTerm.value).toLowerCase())) {
+        fsResultsSplit[j] = '<span style="background-color: #32cd32">' + fsResultsSplit[j] + "</span>";
+        fsResults[i].innerHTML = fsResultsSplit.join(' ');
+      } else {
+
+      }
     }
+
+    // fsResults[i].innerHTML = fsResults[i].innerHTML.replace(`${searchTerm.value}`, `<span style="background-color: #32cd32">${searchTerm.value}</span>`)
+
   }
 })
 
@@ -35,14 +59,17 @@ for (let x = 0; x < saniParsedSearchResSplit.length; x++) {
 
 }
 
+console.log(`searchTerm.value==> ${searchTerm.value}`)
+
 for (let y = 0; y < fsResults[0].parentNode.childNodes.length; y++) {
   // let frontEndWords = fsResults[0].parentNode.childNodes[y + 10].split(/(?<=.+)\s+(?=.+)/)
-  let frontEndWords = fsResults[0].parentNode.childNodes[y + 10]
+  // let frontEndWords = fsResults[0].parentNode.childNodes[y + 10]
+  let frontEndWords = fsResults[0].parentNode.childNodes[y].innerHTML
   let frontEndWordsSplit = frontEndWords.split(/(?<=.+)\s+(?=.+)/)
   for (let z = 0; z < frontEndWordsSplit.length; z++) {
+    // console.log(`frontEndWordsSplit==> ${frontEndWordsSplit}`)
     if (frontEndWordsSplit[z].includes(searchTerm.value))
-      console.log()
-    fsResults[0].parentNode.childNodes[y].innerHTML.replace(`${searchTerm.value}`, `<span style="background-color: green">${searchTerm.value}</span>`)
+      fsResults[0].parentNode.childNodes[y].innerHTML.replace(`${searchTerm.value}`, `<span style="background-color: #32cd32">${searchTerm.value}</span>`)
   }
 }
 
